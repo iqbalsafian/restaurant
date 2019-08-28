@@ -7,6 +7,12 @@ import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import ordersReducer from './redux/reducers/';
+
+const store = createStore(ordersReducer);
+
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
@@ -22,7 +28,15 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
+        <Provider store={store}>
+          <AppNavigator
+            screenProps={{
+              currentOrder: this.state.currentOrder,
+              orders: this.state.orders,
+              addOrder: this.addOrder
+            }}
+          />
+        </Provider>
       </View>
     );
   }
