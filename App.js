@@ -30,11 +30,11 @@ export default function App(props) {
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <Provider store={store}>
           <AppNavigator
-            screenProps={{
-              currentOrder: this.state.currentOrder,
-              orders: this.state.orders,
-              addOrder: this.addOrder
-            }}
+            // screenProps={{
+            //   currentOrder: this.state.currentOrder,
+            //   orders: this.state.orders,
+            //   addOrder: this.addOrder
+            // }}
           />
         </Provider>
       </View>
