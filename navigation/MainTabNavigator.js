@@ -1,26 +1,29 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import OrdersScreen from '../screens/OrdersScreen';
+import ReadyScreen from '../screens/ReadyScreen';
 
 const config = Platform.select({
-  web: { headerMode: 'screen' },
+  web: {
+    headerMode: 'screen',
+    headerLayoutPreset: 'center'
+  },
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const OrdersStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Orders: OrdersScreen
   },
   config
-);
+)
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+OrdersScreen.navigationOptions = {
+  tabBarLabel: 'Orders',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -33,7 +36,30 @@ HomeStack.navigationOptions = {
   ),
 };
 
-HomeStack.path = '';
+OrdersStack.path = '';
+
+const ReadyStack = createStackNavigator(
+  {
+    Ready: ReadyScreen,
+  },
+  config
+)
+
+ReadyScreen.navigationOptions = {
+  tabBarLabel: 'Ready',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
+
+ReadyStack.path = '';
 
 const LinksStack = createStackNavigator(
   {
@@ -51,27 +77,27 @@ LinksStack.navigationOptions = {
 
 LinksStack.path = '';
 
-const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
-);
+const tabNavigatorConfig = {
+  tabBarOptions: {
+    labelStyle: {
+      fontSize: 40,
+      color: 'black'
+    },
+    tabStyle: {
+      // width: 100,
+    },
+    style: {
+      backgroundColor: 'white',
+      marginBottom: '-70px'
+    },
+  }
+}
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
-
-SettingsStack.path = '';
-
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
+const tabNavigator = createMaterialTopTabNavigator({
+  OrdersStack,
+  ReadyStack,
+  LinksStack
+}, tabNavigatorConfig);
 
 tabNavigator.path = '';
 
