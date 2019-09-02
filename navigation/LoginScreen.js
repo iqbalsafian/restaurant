@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Button from "../components/Button";
 import FormTextInput from "../components/FormTextInput";
 
@@ -18,14 +18,14 @@ export default function LoginScreen(props) {
         <FormTextInput
           value={email}
           onChangeText={e=>setEmail(e.target.value)}
-          placeholder={strings.EMAIL_PLACEHOLDER}
+          placeholder="email"
         />
         <FormTextInput
           value={password}
           onChangeText={e=>setPassword(e.target.value)}
-          placeholder={strings.PASSWORD_PLACEHOLDER}
+          placeholder="password"
         />
-        <Button label={strings.LOGIN} onPress={props.navigation.navigate('App')} />
+        <Button label="Login" onPress={props.navigation.navigate('App')} />
       </View>
     </View>
   )

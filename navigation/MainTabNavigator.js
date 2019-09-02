@@ -96,7 +96,7 @@ const tabNavigatorConfig = {
 const tabNavigator = createMaterialTopTabNavigator({
   OrdersStack,
   ReadyStack,
-  LinksStack
+  // LinksStack
 }, tabNavigatorConfig);
 
 tabNavigator.path = '';
