@@ -12,62 +12,19 @@ import {
 import { Button, Card, Caption } from 'react-native-paper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { changeCurrentOrder } from '../redux/actions/index.js';
-
-const INITIAL_STATE = {
-  orders: [
-    {
-      id: 1011,
-      status: 'new',
-      timestamp: 100,
-      total_price: 100,
-      sales_tax: 10,
-      custom_fees: 12,
-      list: [
-        {
-          title: 'chicken brodo',
-          price: 9
-        },
-        {
-          title: 'proscuitto pie',
-          price: 12
-        }
-      ]
-    },
-    {
-      id: 1012,
-      status: 'new',
-      timestamp: 100,
-      total_price: 100,
-      sales_tax: 10,
-      custom_fees: 12,
-      list: [
-        {
-          title: 'chicken brodo',
-          price: 9
-        },
-        {
-          title: 'proscuitto pie',
-          price: 12
-        }
-      ]
-    }
-  ],
-  currentOrderId: 1011
-};
+import { setCurrentOrder } from '../redux/actions/index.js';
 
 function OrdersScreen(props) {
-  function setCurrentOrder(orderId) {
-    props.changeCurrentOrder(orderId);
-  }
-  console.log(props);
-  const [currentOrderId, setCurrentOrderId] = useState(INITIAL_STATE.currentOrderId ? INITIAL_STATE.currentOrderId : 0);
+  const { orders } = props.redux.state;
+  const { currentOrderId } = props.redux.state;
+  const currentOrder = orders.find((order)=>{order.Id === currentOrderId});
+
   return (
     <View style={styles.container}>
       <View style={{width: '20%'}}>
         <Text style={{padding: 10, fontSize: 20}}>NEW ORDERS</Text>
         {
-          INITIAL_STATE.orders.map(order => {
+          orders.map(order => {
             return (
               <View key={order.id}>
                 <Card style={{backgroundColor: (order.id === currentOrderId) ? '#DCDCDC' : ''}}>
@@ -76,7 +33,7 @@ function OrdersScreen(props) {
                       order.id === currentOrderId ?
                         <Text style={styles.defaultText}>{order.id}</Text>
                       :
-                        <TouchableOpacity onPress={()=>setCurrentOrderId(order.id)}>
+                        <TouchableOpacity onPress={()=>{props.setCurrentOrder(order.id)}}>
                           <Text style={styles.defaultText}>{order.id}</Text>
                         </TouchableOpacity>
                     }
@@ -137,9 +94,6 @@ function OrdersScreen(props) {
           <Button style={{height: '40px',width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green'}} onPress={()=>{}} mode='contained'>
             Confirm Order
           </Button>
-          {/* <TouchableOpacity
-            style={{width: '100%', backgroundColor: 'cyan', alignItems: 'center'}}
-            onPress={()=>{}}><Text>Confirm Order</Text></TouchableOpacity> */}
         </View>
       </View>
     </View>
@@ -171,6 +125,7 @@ OrdersScreen.propTypes = {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  console.log(stateProps);
   return {
     ...ownProps,
     ...dispatchProps,
@@ -181,13 +136,16 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 }
 
 const mapStateToProps = state => {
-  return { orders: state.orders };
+  return {
+    orders: state.ordersReducer.orders,
+    currentOrderId: state.ordersReducer.currentOrderId
+  };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeCurrentOrder: orderId => {
-      dispatch(changeCurrentOrder(orderId))
+    setCurrentOrder: orderId => {
+      dispatch(setCurrentOrder(orderId))
     }
   }
 }

@@ -7,10 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Card } from 'react-native-paper';
 import AppNavigator from './navigation/AppNavigator';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import ordersReducer from './redux/reducers/index';
-
-const store = createStore(ordersReducer);
+import store from './redux/store/index';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
