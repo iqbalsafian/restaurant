@@ -6,8 +6,8 @@ import { Platform, StatusBar, StyleSheet, View, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Card } from 'react-native-paper';
 import AppNavigator from './navigation/AppNavigator';
-import { Provider } from 'react-redux';
-import store from './redux/store/index';
+// import { Provider } from 'react-redux';
+// import store from './redux/store/index';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -24,10 +24,10 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {/*}
         <Card.Title title="One" subtitle={"The \"super\" app of apps"} left={(props) => <Image resizeMode="contain" style={{width: 40, height: 40}} source={require('./assets/images/circle.png')} />} />
-        <Provider store={store}>
-          <AppNavigator />
-        </Provider>
+        {*/}
+        <AppNavigator />
       </View>
     );
   }

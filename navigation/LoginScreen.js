@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import Button from "../components/Button";
+import { ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+// import Button from "../components/Button";
 import FormTextInput from "../components/FormTextInput";
 
 interface State {
@@ -14,7 +14,6 @@ export default function LoginScreen(props) {
   return(
     <View style={styles.container}>
       <View style={styles.form}>
-        <Text>a</Text>
         <FormTextInput
           value={email}
           onChangeText={e=>setEmail(e.target.value)}
@@ -24,8 +23,12 @@ export default function LoginScreen(props) {
           value={password}
           onChangeText={e=>setPassword(e.target.value)}
           placeholder="password"
+          secureTextEntry={true}
         />
-        <Button label="Login" onPress={props.navigation.navigate('App')} />
+        <TouchableOpacity onPress={()=>{props.navigation.navigate('App')}}>
+          <Text>Login</Text>
+        </TouchableOpacity>
+        {/* <Button label="Login" onPress={props.navigation.navigate('App')} /> */}
       </View>
     </View>
   )

@@ -1,6 +1,6 @@
 import { SET_CURRENT_ORDER_ID } from '../constants/action-types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   orders: [
     {
       id: 1011,
@@ -54,7 +54,6 @@ const ordersReducer = (state = INITIAL_STATE, action) => {
         currentOrderId
       }
     default: {
-      console.log(INITIAL_STATE);
       return state;
     }
   }

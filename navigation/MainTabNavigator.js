@@ -88,7 +88,7 @@ const tabNavigatorConfig = {
     },
     style: {
       backgroundColor: 'white',
-      marginBottom: '-70px'
+      marginBottom: -70
     },
   }
 }

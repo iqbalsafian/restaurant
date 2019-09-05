@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Colors from '../constants/Colors';
 
@@ -9,8 +10,8 @@ interface Props {
 export default function Button(props) {
   return (
     <TouchableOpacity
-      style={styles.container} onPress={onPress}>
-        <Text style={styles.text}>{label}</Text>
+      style={styles.container} onPress={props.onPress}>
+        <Text style={styles.text}>{props.label}</Text>
     </TouchableOpacity>
   )
 }

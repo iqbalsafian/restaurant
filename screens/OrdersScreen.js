@@ -13,11 +13,17 @@ import { Button, Card, Caption } from 'react-native-paper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setCurrentOrder } from '../redux/actions/index.js';
+import { INITIAL_STATE } from '../redux/reducers/ordersReducer';
 
 function OrdersScreen(props) {
-  const { orders } = props.redux.state;
-  const { currentOrderId } = props.redux.state;
-  const currentOrder = orders.find((order)=>{order.Id === currentOrderId});
+  let { orders } = INITIAL_STATE;
+  let [currentOrderId, setCurrentOrderId] = useState(INITIAL_STATE.orders[0].id);
+  let [currentOrder, setCurrentOrder] = useState(orders.find((order)=>{order.id === currentOrderId}));
+
+  setOrderStatus = (status) => {
+    let currentOrderIndex = orders.findIndex(order=>order.id===currentOrderId);
+    orders[currentOrderIndex].status = status
+  }
 
   return (
     <View style={styles.container}>
@@ -33,7 +39,7 @@ function OrdersScreen(props) {
                       order.id === currentOrderId ?
                         <Text style={styles.defaultText}>{order.id}</Text>
                       :
-                        <TouchableOpacity onPress={()=>{props.setCurrentOrder(order.id)}}>
+                        <TouchableOpacity onPress={()=>{setCurrentOrderId(order.id)}}>
                           <Text style={styles.defaultText}>{order.id}</Text>
                         </TouchableOpacity>
                     }
@@ -58,7 +64,7 @@ function OrdersScreen(props) {
                   <Text style={styles.orderDetailsHeader}>10 Mins</Text>
                 </View>
                 <View style={{width: '60%', alignContent: 'flex-end', alignItems:'flex-end'}}>
-                  <Button style={{width: '300px', height: '50px'}}>Raise Issue</Button>
+                  <Button style={{width: 300, height: 50}}>Raise Issue</Button>
                 </View>
               </View>
             </Card.Content>
@@ -91,9 +97,9 @@ function OrdersScreen(props) {
           </Card>
         </View>
         <View style={{padding: 3,bottom: 0, alignItems: 'center', position: 'absolute', justifyContent:'center', width: '100%'}}>
-          <Button style={{height: '40px',width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green'}} onPress={()=>{}} mode='contained'>
-            Confirm Order
-          </Button>
+          <TouchableOpacity style={{height: 40,width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green'}} onPress={()=>{setOrderStatus('ready')}} mode='contained'>
+            <Text style={{width:'100%'}}>Confirm Order</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -112,13 +118,14 @@ const styles = {
     // fontSize: 40
   },
   defaultText: {
-    fontSize: '20px',
+    fontSize: 20,
   },
   orderDetailsHeader: {
     fontWeight: 'bold'
   }
 }
 
+/*
 OrdersScreen.propTypes = {
   orders: PropTypes.array,
   changeCurrentOrder: PropTypes.func
@@ -149,5 +156,6 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(OrdersScreen);
+*/
+// export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default OrdersScreen;
