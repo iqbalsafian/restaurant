@@ -20,11 +20,12 @@ function OrdersScreen(props) {
   let [currentOrderId, setCurrentOrderId] = useState(INITIAL_STATE.orders[0].id);
   let [currentOrder, setCurrentOrder] = useState(orders.find((order)=>{order.id === currentOrderId}));
 
-  setOrderStatus = (status) => {
+  const setOrderStatus = (status) => {
     let currentOrderIndex = orders.findIndex(order=>order.id===currentOrderId);
     orders[currentOrderIndex].status = status
   }
 
+  console.log(currentOrder);
   return (
     <View style={styles.container}>
       <View style={{width: '20%'}}>
@@ -39,7 +40,12 @@ function OrdersScreen(props) {
                       order.id === currentOrderId ?
                         <Text style={styles.defaultText}>{order.id}</Text>
                       :
-                        <TouchableOpacity onPress={()=>{setCurrentOrderId(order.id)}}>
+                        <TouchableOpacity
+                          onPress={()=>{
+                            setCurrentOrderId(order.id);
+                            currentOrder = orders.find(order=>order.id===currentOrderId)
+                          }}
+                        >
                           <Text style={styles.defaultText}>{order.id}</Text>
                         </TouchableOpacity>
                     }
@@ -97,8 +103,8 @@ function OrdersScreen(props) {
           </Card>
         </View>
         <View style={{padding: 3,bottom: 0, alignItems: 'center', position: 'absolute', justifyContent:'center', width: '100%'}}>
-          <TouchableOpacity style={{height: 40,width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green'}} onPress={()=>{setOrderStatus('ready')}} mode='contained'>
-            <Text style={{width:'100%'}}>Confirm Order</Text>
+          <TouchableOpacity style={{height: 40,width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green', justifyContent: 'center', flex: 1}} onPress={()=>{setOrderStatus('ready')}} mode='contained'>
+            <Text style={{width:'100%', alignItems:'center', color: 'white', justifyContent: 'center', flex: 1}}>Confirm Order</Text>
           </TouchableOpacity>
         </View>
       </View>
