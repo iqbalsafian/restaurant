@@ -41,10 +41,12 @@ function OrdersScreen(props) {
                         <Text style={styles.defaultText}>{order.id}</Text>
                       :
                         <TouchableOpacity
-                          onPress={()=>{
-                            setCurrentOrderId(order.id);
-                            currentOrder = orders.find(order=>order.id===currentOrderId)
-                          }}
+                          onPress={
+                            ()=>{
+                              setCurrentOrderId(order.id)
+                              setCurrentOrder(orders.find(order_=>order_.id===order.id))
+                            }
+                          }
                         >
                           <Text style={styles.defaultText}>{order.id}</Text>
                         </TouchableOpacity>
