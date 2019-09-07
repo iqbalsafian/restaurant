@@ -28,7 +28,6 @@ function OrdersScreen(props) {
     orders[currentOrderIndex].status = status
   }
 
-  console.log(orders);
   return (
     <View style={styles.container}>
       <View style={{width: '20%'}}>
@@ -142,13 +141,12 @@ function OrdersScreen(props) {
             onPress={
               ()=>{
                 (currentOrder.status==='new') ? setOrderStatus('in-progress') : setOrderStatus('ready')
-                console.log(orders);
                 forceUpdate()
               }
             }
             mode='contained'>
-            <Text style={{width:'100%', alignItems:'center', color: 'white', justifyContent: 'center', flex: 1}}>
-              {(currentOrder.status==='new') ? 'Confirm Order' : 'Set to Ready'}
+            <Text style={{width:'100%', alignItems:'center', color: 'white', justifyContent: 'center', flex: 1, textAlign:'center', textAlignVertical: 'center'}}>
+              {(currentOrder.status==='new') ? 'CONFIRM ORDER' : 'SET TO READY'}
             </Text>
           </TouchableOpacity>
         </View>
@@ -183,7 +181,6 @@ OrdersScreen.propTypes = {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  console.log(stateProps);
   return {
     ...ownProps,
     ...dispatchProps,
