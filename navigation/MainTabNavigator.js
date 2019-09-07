@@ -22,7 +22,9 @@ const OrdersStack = createStackNavigator(
   config
 )
 
-OrdersScreen.navigationOptions = {
+OrdersStack.navigationOptions = {
+  title: 'Orders',
+  headerTitle: 'Orders',
   tabBarLabel: 'Orders',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -45,7 +47,7 @@ const ReadyStack = createStackNavigator(
   config
 )
 
-ReadyScreen.navigationOptions = {
+ReadyStack.navigationOptions = {
   tabBarLabel: 'Ready',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -88,7 +90,6 @@ const tabNavigatorConfig = {
     },
     style: {
       backgroundColor: 'white',
-      marginBottom: -70
     },
   }
 }

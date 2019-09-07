@@ -96,7 +96,7 @@ function OrdersScreen(props) {
           }
         </View>
       </View>
-      <View style={{width: '80%', borderLeftWidth: 0.7, borderStyle: 'solid', borderLeftColor: '#d6d7da', minHeight: '100%'}}>
+      <View style={{width: '80%', borderLeftWidth: 0.7, borderStyle: 'solid', borderLeftColor: '#d6d7da'}}>
         <View style={{padding: 10, alignItems: 'center'}}>
           <Card style={{width: '70%'}}>
             <Card.Content>
