@@ -9,7 +9,7 @@ export const INITIAL_STATE = {
       total_price: 100,
       sales_tax: 10,
       custom_fees: 12,
-      list: [
+      lists: [
         {
           title: 'chicken brodo',
           price: 9
@@ -27,14 +27,16 @@ export const INITIAL_STATE = {
       total_price: 100,
       sales_tax: 10,
       custom_fees: 12,
-      list: [
+      lists: [
         {
           title: 'chicken brodo',
-          price: 9
+          price: 9,
+          remarks: 'Extra Cheese'
         },
         {
           title: 'proscuitto pie',
-          price: 12
+          price: 12,
+          remarks: 'No Anchovies'
         }
       ]
     }

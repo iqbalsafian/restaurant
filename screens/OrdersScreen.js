@@ -18,45 +18,84 @@ import { INITIAL_STATE } from '../redux/reducers/ordersReducer';
 function OrdersScreen(props) {
   let { orders } = INITIAL_STATE;
   let [currentOrderId, setCurrentOrderId] = useState(INITIAL_STATE.orders[0].id);
-  let [currentOrder, setCurrentOrder] = useState(orders.find((order)=>{order.id === currentOrderId}));
+  const [, updateState] = useState();
+  const forceUpdate = React.useCallback(()=>updateState({}), []);
+
+  let [currentOrder, setCurrentOrder] = useState(orders.find((order)=>order.id===currentOrderId));
 
   const setOrderStatus = (status) => {
     let currentOrderIndex = orders.findIndex(order=>order.id===currentOrderId);
     orders[currentOrderIndex].status = status
   }
 
-  console.log(currentOrder);
+  console.log(orders);
   return (
     <View style={styles.container}>
       <View style={{width: '20%'}}>
-        <Text style={{padding: 10, fontSize: 20}}>NEW ORDERS</Text>
-        {
-          orders.map(order => {
-            return (
-              <View key={order.id}>
-                <Card style={{backgroundColor: (order.id === currentOrderId) ? '#DCDCDC' : ''}}>
-                  <Card.Content>
-                    {
-                      order.id === currentOrderId ?
-                        <Text style={styles.defaultText}>{order.id}</Text>
-                      :
-                        <TouchableOpacity
-                          onPress={
-                            ()=>{
-                              setCurrentOrderId(order.id)
-                              setCurrentOrder(orders.find(order_=>order_.id===order.id))
-                            }
-                          }
-                        >
+        <View style={{width: '100%'}}>
+          <Text style={{padding: 10, fontSize: 20}}>NEW ORDERS</Text>
+          {
+            orders
+            .filter(order=>order.status === 'new')
+            .map(order => {
+              return (
+                <View key={order.id}>
+                  <Card style={{backgroundColor: (order.id === currentOrderId) ? '#DCDCDC' : ''}}>
+                    <Card.Content>
+                      {
+                        order.id === currentOrderId ?
                           <Text style={styles.defaultText}>{order.id}</Text>
-                        </TouchableOpacity>
-                    }
-                  </Card.Content>
-                </Card>
-              </View>
-            )
-          })
-        }
+                        :
+                          <TouchableOpacity
+                            onPress={
+                              ()=>{
+                                setCurrentOrderId(order.id)
+                                setCurrentOrder(orders.find(order_=>order_.id===order.id))
+                              }
+                            }
+                          >
+                            <Caption style={styles.defaultText}>{order.id}</Caption>
+                          </TouchableOpacity>
+                      }
+                    </Card.Content>
+                  </Card>
+                </View>
+              )
+            })
+          }
+        </View>
+        <View style={{width: '100%'}}>
+          <Text style={{padding: 10, fontSize: 20}}>IN PROGRESS</Text>
+          {
+            orders
+            .filter(order=>order.status === 'in-progress')
+            .map(order => {
+              return (
+                <View key={order.id}>
+                  <Card style={{backgroundColor: (order.id === currentOrderId) ? '#DCDCDC' : ''}}>
+                    <Card.Content>
+                      {
+                        order.id === currentOrderId ?
+                          <Text style={styles.defaultText}>{order.id}</Text>
+                        :
+                          <TouchableOpacity
+                            onPress={
+                              ()=>{
+                                setCurrentOrderId(order.id)
+                                setCurrentOrder(orders.find(order_=>order_.id===order.id))
+                              }
+                            }
+                          >
+                            <Text style={styles.defaultText}>{order.id}</Text>
+                          </TouchableOpacity>
+                      }
+                    </Card.Content>
+                  </Card>
+                </View>
+              )
+            })
+          }
+        </View>
       </View>
       <View style={{width: '80%', borderLeftWidth: 0.7, borderStyle: 'solid', borderLeftColor: '#d6d7da', minHeight: '100%'}}>
         <View style={{padding: 10, alignItems: 'center'}}>
@@ -77,36 +116,40 @@ function OrdersScreen(props) {
               </View>
             </Card.Content>
             <Card.Content>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{width: '20%'}}>
-                  <Caption style={styles.orderDetailsHeader}>2</Caption>
-                </View>
-                <View style={{width: '20%'}}>
-                  <Text style={styles.orderDetailsHeader}>Chicken Brodo</Text>
-                  <Caption>Extra cheese, Anchovies</Caption>
-                </View>
-                <View style={{width: '60%', alignContent: 'flex-end', alignItems:'flex-end'}}>
-                  <Text style={styles.orderDetailsHeader}>$11.00</Text>
-                </View>
-              </View>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{width: '20%'}}>
-                  <Caption style={styles.orderDetailsHeader}>2</Caption>
-                </View>
-                <View style={{width: '20%'}}>
-                  <Text style={styles.orderDetailsHeader}>Chicken Brodo</Text>
-                  <Caption>Extra cheese, Anchovies</Caption>
-                </View>
-                <View style={{width: '60%', alignContent: 'flex-end', alignItems:'flex-end'}}>
-                  <Text style={styles.orderDetailsHeader}>$11.00</Text>
-                </View>
-              </View>
+            {
+              currentOrder.lists.map((list, index)=>{
+                return (
+                  <View style={{flex: 1, flexDirection: 'row'}} key={index}>
+                    <View style={{width: '20%'}}>
+                      <Text style={styles.orderDetailsHeader}>{index+1}</Text>
+                    </View>
+                    <View style={{width: '60%'}}>
+                      <Text style={styles.orderDetailsHeader}>{list.title}</Text>
+                      <Caption>{list.remarks}</Caption>
+                    </View>
+                    <View style={{width: '20%'}}>
+                      <Text style={styles.orderDetailsHeader}>{list.price}</Text>
+                    </View>
+                  </View>
+                )
+              })
+            }
             </Card.Content>
           </Card>
         </View>
         <View style={{padding: 3,bottom: 0, alignItems: 'center', position: 'absolute', justifyContent:'center', width: '100%'}}>
-          <TouchableOpacity style={{height: 40,width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green', justifyContent: 'center', flex: 1}} onPress={()=>{setOrderStatus('ready')}} mode='contained'>
-            <Text style={{width:'100%', alignItems:'center', color: 'white', justifyContent: 'center', flex: 1}}>Confirm Order</Text>
+          <TouchableOpacity style={{height: 40,width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green', justifyContent: 'center', flex: 1}}
+            onPress={
+              ()=>{
+                (currentOrder.status==='new') ? setOrderStatus('in-progress') : setOrderStatus('ready')
+                console.log(orders);
+                forceUpdate()
+              }
+            }
+            mode='contained'>
+            <Text style={{width:'100%', alignItems:'center', color: 'white', justifyContent: 'center', flex: 1}}>
+              {(currentOrder.status==='new') ? 'Confirm Order' : 'Set to Ready'}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
