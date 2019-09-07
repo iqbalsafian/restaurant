@@ -97,7 +97,9 @@ const tabNavigatorConfig = {
       borderBottomWidth: 'thin',
       alignContent: 'center',
       justifyContent: 'center'
-    }
+    },
+    lazy: true,
+    optimizationsEnabled: true
   }
 }
 

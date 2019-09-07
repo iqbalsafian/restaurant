@@ -39,6 +39,26 @@ export const INITIAL_STATE = {
           remarks: 'No Anchovies'
         }
       ]
+    },
+    {
+      id: 1008,
+      status: 'ready',
+      timestamp: 100,
+      total_price: 120,
+      sales_tax: 12,
+      custom_fees: 12,
+      lists: [
+        {
+          title: 'chicken brodo',
+          price: 9,
+          remarks: 'Extra Cheese'
+        },
+        {
+          title: 'proscuitto pie',
+          price: 12,
+          remarks: 'No Anchovies'
+        }
+      ]
     }
   ],
   currentOrderId: 1011,
