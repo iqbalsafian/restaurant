@@ -12,7 +12,7 @@ import { Card, Caption } from 'react-native-paper';
 import { INITIAL_STATE } from '../redux/reducers/ordersReducer';
 
 export default function ReadyScreen() {
-  const { orders } = INITIAL_STATE;
+  const orders = [...INITIAL_STATE.orders];
   const [currentOrderId, setCurrentOrderId] = useState(INITIAL_STATE.orders[0].id);
   const [currentOrder, setCurrentOrder] = useState(INITIAL_STATE.orders[0]);
 
@@ -20,25 +20,47 @@ export default function ReadyScreen() {
     <View style={styles.container}>
       <View style={{width: '20%'}}>
         <View style={styles.leftTab}>
-          <Text style={{padding: 10, fontSize: 20, textAlignVertical:'center', textAlign:'center'}}>READY ORDERS</Text>
+          <Text style={styles.leftHeader}>READY ORDERS</Text>
           {
             orders &&
             orders
-              .filter(order=>order.status==='new')
+              .filter(order=>order.status==='ready')
               .map(order=>{
                 return (
                   <Card style={{backgroundColor: (order.id === currentOrderId) ? '#DCDCDC' : ''}} key={order.id}>
                     <Card.Content>
-                      <TouchableOpacity
-                        onPress={
-                          ()=>{
-                            setCurrentOrderId(order.id)
-                            setCurrentOrder(orders.find(order_=>order_.id===order.id))
+                      {
+                        (order.id === currentOrderId) ?
+                        <Text style={styles.defaultText}>{order.id}</Text>
+                        :
+                        <TouchableOpacity
+                          onPress={
+                            ()=>{
+                              setCurrentOrderRId(order.id)
+                              setCurrentROrder(orders.find(order_=>order_.id===order.id))
+                            }
                           }
-                        }
-                      >
-                        <Caption style={styles.defaultText}>{order.id}</Caption>
-                      </TouchableOpacity>
+                        >
+                          <Caption style={styles.defaultText}>{order.id}</Caption>
+                        </TouchableOpacity>
+                      }
+                    </Card.Content>
+                  </Card>
+                )
+              })
+          }
+        </View>
+        <View>
+          <Text style={styles.leftHeader}>PICKED-UP</Text>
+          {
+            orders &&
+            orders
+              .filter(order=>order.status==='completed')
+              .map(order=>{
+                return (
+                  <Card style={{backgroundColor: ''}} key={order.id}>
+                    <Card.Content>
+                      <Text style={styles.defaultText}>{order.id}</Text>
                     </Card.Content>
                   </Card>
                 )
@@ -71,4 +93,10 @@ const styles = {
   leftTab: {
     padding: 10
   },
+  leftHeader: {
+    padding: 10,
+    fontSize: 20,
+    textAlignVertical:'center',
+    textAlign:'center'
+  }
 }

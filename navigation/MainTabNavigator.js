@@ -86,14 +86,18 @@ const tabNavigatorConfig = {
       color: 'black'
     },
     tabStyle: {
-      // width: 100,
+      // width: 300,
+      alignContent: 'center',
+      justifyContent: 'center',
     },
     style: {
       backgroundColor: 'white',
       borderBottomStyle: 'solid',
       borderBottomColor: '#DCDCDC',
-      borderBottomWidth: 'thin'
-    },
+      borderBottomWidth: 'thin',
+      alignContent: 'center',
+      justifyContent: 'center'
+    }
   }
 }
 
