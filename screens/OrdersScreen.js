@@ -12,7 +12,6 @@ import {
 import { Button, Card, Caption } from 'react-native-paper';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setCurrentOrder } from '../redux/actions/index.js';
 import { INITIAL_STATE } from '../redux/reducers/ordersReducer';
 
 function OrdersScreen(props) {
@@ -32,8 +31,9 @@ function OrdersScreen(props) {
     <View style={styles.container}>
       <View style={{width: '20%'}}>
         <View style={{width: '100%'}}>
-          <Text style={{padding: 10, fontSize: 20}}>NEW ORDERS</Text>
+          <Text style={{padding: 10, fontSize: 20, textAlignVertical:'center', textAlign:'center'}}>NEW ORDERS</Text>
           {
+            orders &&
             orders
             .filter(order=>order.status === 'new')
             .map(order => {
@@ -64,7 +64,7 @@ function OrdersScreen(props) {
           }
         </View>
         <View style={{width: '100%'}}>
-          <Text style={{padding: 10, fontSize: 20}}>IN PROGRESS</Text>
+          <Text style={{padding: 10, fontSize: 20, textAlignVertical:'center', textAlign:'center'}}>IN PROGRESS</Text>
           {
             orders
             .filter(order=>order.status === 'in-progress')
@@ -145,7 +145,7 @@ function OrdersScreen(props) {
               }
             }
             mode='contained'>
-            <Text style={{width:'100%', alignItems:'center', color: 'white', justifyContent: 'center', flex: 1, textAlign:'center', textAlignVertical: 'center'}}>
+            <Text style={{ width:'100%', alignItems:'center', color: 'white', justifyContent: 'center', flex: 1, textAlign:'center', textAlignVertical: 'center'}}>
               {(currentOrder.status==='new') ? 'CONFIRM ORDER' : 'SET TO READY'}
             </Text>
           </TouchableOpacity>

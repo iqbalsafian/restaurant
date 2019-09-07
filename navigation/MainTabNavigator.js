@@ -90,6 +90,9 @@ const tabNavigatorConfig = {
     },
     style: {
       backgroundColor: 'white',
+      borderBottomStyle: 'solid',
+      borderBottomColor: '#DCDCDC',
+      borderBottomWidth: 'thin'
     },
   }
 }
