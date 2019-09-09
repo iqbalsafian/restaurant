@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { Button, Card, Caption } from 'react-native-paper';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
@@ -22,7 +23,7 @@ function OrdersScreen(props) {
   let [currentOrderId, setCurrentOrderId] = useState(
     INITIAL_STATE.orders.find(order=>(order.status==='new'||order.status==='in-progress')).id
   );
-  let [currentOrder, setCurrentOrder] = useState(INITIAL_STATE.orders.find(order=>order.status==='new'));
+  let [currentOrder, setCurrentOrder] = useState(INITIAL_STATE.orders.find(order=>(order.status==='new'||order.status==='in-progress')));
 
   const setOrderStatus = (status) => {
     let currentOrderIndex = orders.findIndex(order=>order.id===currentOrderId);

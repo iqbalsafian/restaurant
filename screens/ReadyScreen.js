@@ -17,7 +17,7 @@ export default function ReadyScreen() {
 
   const { orders } = INITIAL_STATE;
   const [currentOrderId, setCurrentOrderId] = useState(INITIAL_STATE.orders.find(order=>order.status==='ready').id);
-  const [currentOrder, setCurrentOrder] = useState(INITIAL_STATE.orders.find(order=>order.status==='ready'));
+  const [currentOrder, setCurrentOrder] = useState(INITIAL_STATE.orders.find(order=>(order.status==='ready')));
 
   const setOrderStatus = (status) => {
     let currentOrderIndex = orders.findIndex(order=>order.id===currentOrderId);
@@ -120,11 +120,11 @@ export default function ReadyScreen() {
           {
             currentOrder.status === 'ready' ?
             <TouchableOpacity style={{height: 40,width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green', justifyContent: 'center', flex: 1}}
-              onPress={()=>{}
-                // ()=>{
-                //   setOrderStatus('completed')
-                //   forceUpdate()
-                // }
+              onPress={//()=>{}
+                ()=>{
+                  setOrderStatus('completed')
+                  forceUpdate()
+                }
               }
               mode='contained'>
               <Text style={{ width:'100%', alignItems:'center', color: 'white', justifyContent: 'center', flex: 1, textAlign:'center', textAlignVertical: 'center'}}>

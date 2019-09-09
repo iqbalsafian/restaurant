@@ -38,7 +38,7 @@ OrdersStack.navigationOptions = {
   ),
 };
 
-OrdersStack.path = '';
+OrdersStack.path = 'orders';
 
 const ReadyStack = createStackNavigator(
   {
@@ -61,26 +61,13 @@ ReadyStack.navigationOptions = {
   ),
 };
 
-ReadyStack.path = '';
-
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-  config
-);
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
-
-LinksStack.path = '';
+ReadyStack.path = 'ready';
 
 const tabNavigatorConfig = {
   tabBarOptions: {
+    indicatorStyle: {
+      backgroundColor: 'green'
+    },
     labelStyle: {
       fontSize: 40,
       color: 'black'
@@ -94,19 +81,18 @@ const tabNavigatorConfig = {
       backgroundColor: 'white',
       borderBottomStyle: 'solid',
       borderBottomColor: '#DCDCDC',
-      borderBottomWidth: 'thin',
+      borderBottomWidth: 0.2,
       alignContent: 'center',
       justifyContent: 'center'
     },
     lazy: true,
-    optimizationsEnabled: true
+    optimizationsEnabled: true,
   }
 }
 
 const tabNavigator = createMaterialTopTabNavigator({
   OrdersStack,
-  ReadyStack,
-  // LinksStack
+  ReadyStack
 }, tabNavigatorConfig);
 
 tabNavigator.path = '';
