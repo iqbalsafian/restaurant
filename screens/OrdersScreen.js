@@ -60,7 +60,7 @@ function OrdersScreen(props) {
   function setCurrentOrder(orderId) {
     props.changeCurrentOrder(orderId);
   }
-  console.log(props);
+  // console.log(props);
   const [currentOrderId, setCurrentOrderId] = useState(INITIAL_STATE.currentOrderId ? INITIAL_STATE.currentOrderId : 0);
   return (
     <View style={styles.container}>
@@ -101,7 +101,7 @@ function OrdersScreen(props) {
                   <Text style={styles.orderDetailsHeader}>10 Mins</Text>
                 </View>
                 <View style={{width: '60%', alignContent: 'flex-end', alignItems:'flex-end'}}>
-                  <Button style={{width: '300px', height: '50px'}}>Raise Issue</Button>
+                  <Button style={{width: 300, height: 50}}>Raise Issue</Button>
                 </View>
               </View>
             </Card.Content>
@@ -134,7 +134,7 @@ function OrdersScreen(props) {
           </Card>
         </View>
         <View style={{padding: 3,bottom: 0, alignItems: 'center', position: 'absolute', justifyContent:'center', width: '100%'}}>
-          <Button style={{height: '40px',width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green'}} onPress={()=>{}} mode='contained'>
+          <Button style={{height: 40,width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green'}} onPress={()=>{}} mode='contained'>
             Confirm Order
           </Button>
           {/* <TouchableOpacity
@@ -158,7 +158,7 @@ const styles = {
     // fontSize: 40
   },
   defaultText: {
-    fontSize: '20px',
+    fontSize: 20,
   },
   orderDetailsHeader: {
     fontWeight: 'bold'

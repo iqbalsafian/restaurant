@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import LinksScreen from '../screens/LinksScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import ReadyScreen from '../screens/ReadyScreen';
+import LeftoversScreen from '../screens/LeftoversScreen';
 
 const config = Platform.select({
   web: {
@@ -77,6 +78,29 @@ LinksStack.navigationOptions = {
 
 LinksStack.path = '';
 
+const LeftoversStack = createStackNavigator(
+  {
+    Leftovers: LeftoversScreen,
+  },
+  config
+);
+
+LeftoversStack.navigationOptions = {
+  tabBarLabel: 'Leftovers',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
+
+LeftoversStack.path = '';
+
 const tabNavigatorConfig = {
   tabBarOptions: {
     labelStyle: {
@@ -88,7 +112,7 @@ const tabNavigatorConfig = {
     },
     style: {
       backgroundColor: 'white',
-      marginBottom: '-70px'
+      marginBottom: -70,
     },
   }
 }
@@ -97,6 +121,7 @@ const tabNavigator = createMaterialTopTabNavigator({
   OrdersStack,
   ReadyStack,
   // LinksStack
+  LeftoversStack,
 }, tabNavigatorConfig);
 
 tabNavigator.path = '';

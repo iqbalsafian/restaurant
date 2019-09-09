@@ -5,11 +5,13 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Card } from 'react-native-paper';
+import { initializeFirebase } from './components/Firebase';
 import AppNavigator from './navigation/AppNavigator';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import ordersReducer from './redux/reducers/index';
 
+initializeFirebase();
 const store = createStore(ordersReducer);
 
 export default function App(props) {
