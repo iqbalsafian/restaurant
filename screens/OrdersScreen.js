@@ -138,18 +138,16 @@ function OrdersScreen(props) {
           </View>
         </View>
         <View style={{padding: 3,bottom: 0, alignItems: 'center', position: 'absolute', justifyContent:'center', width: '100%'}}>
-          <TouchableOpacity style={{height: 40,width: '100%', alignItems: 'center', width:'100%', backgroundColor: 'green', justifyContent: 'center', flex: 1}}
+          <Button style={styles.button}
+            dark={false}
             onPress={
               ()=>{
                 (currentOrder.status==='new') ? setOrderStatus('in-progress') : setOrderStatus('ready')
                 forceUpdate()
               }
-            }
-            mode='contained'>
-            <Text style={{ width:'100%', alignItems:'center', color: 'white', justifyContent: 'center', flex: 1, textAlign:'center', textAlignVertical: 'center'}}>
-              {(currentOrder.status==='new') ? 'CONFIRM ORDER' : 'SET TO READY'}
-            </Text>
-          </TouchableOpacity>
+            }>
+            {(currentOrder.status==='new') ? 'CONFIRM ORDER' : 'SET TO READY'}
+          </Button>
         </View>
       </View>
     </View>
@@ -180,7 +178,17 @@ const styles = {
     textAlignVertical:'center',
     textAlign:'center',
     fontWeight: 'bold'
-  }
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: 'rgb(32, 158, 33)',
+    borderRadius: 0,
+    fontSize: 36,
+    color: 'white',
+    height: 60,
+    justifyContent: 'center',
+    width: '100%',
+  },
 }
 
 /*

@@ -6,15 +6,15 @@ import 'firebase/firestore';
 export const initializeFirebase = () => {
   if (!firebase.apps.length) {
     firebase.initializeApp({
-      apiKey: "AIzaSyA1Rj6khC6AuyuQ-ovFD8QJ0ikUe2pcoLI",
-      authDomain: "eudaimonia-3240b.firebaseapp.com",
-      databaseURL: "https://eudaimonia-3240b.firebaseio.com",
-      projectId: "eudaimonia-3240b",
-      storageBucket: "eudaimonia-3240b.appspot.com",
-      messagingSenderId: "203900826837",
-      appId: "1:203900826837:web:bf1eed65d2ed1579"
+      apiKey: "",
+      authDomain: "",
+      databaseURL: "",
+      projectId: "",
+      storageBucket: "",
+      messagingSenderId: "",
+      appId: ""
     });
-  
+
     firebase.firestore();
   }
 }
@@ -44,27 +44,27 @@ export function withCollection({ dataProp, displayName }) {
       get path() {
         return WrappedComponent.collectionPath(this.props);
       }
-  
+
       componentDidMount() {
         this.unsubscribe = db().collection(this.path).onSnapshot((snap) => {
           const data = snap.docs.map((doc) => ({
             ...doc.data(),
             id: doc.id,
           }));
-  
+
           this.setState({ loading: false, data });
         });
       }
-  
+
       componentWillUnmount() {
         this.unsubscribe && this.unsubscribe();
       }
-  
+
       addItem = async (item) => {
         const docRef = await db().collection(this.path).add(item);
         return docRef.id;
       }
-  
+
       render() {
         const { loading, data } = this.state;
         const props = {
@@ -73,14 +73,13 @@ export function withCollection({ dataProp, displayName }) {
           [`${dataProp}Loading`]: loading,
           [`${dataProp}Insert`]: this.addItem,
         }
-  
+
         return (
           <WrappedComponent {...props} />
         );
       }
     }
-    
+
     return CollectionHoC;
   }
 }
-

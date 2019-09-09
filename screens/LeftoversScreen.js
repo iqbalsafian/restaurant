@@ -40,7 +40,7 @@ const priceStyles = {
 
 const PriceComponent = ({ price }) => {
   const priceText = Number(price).toFixed(2);
-  
+
   return (
     <View style={priceStyles.container}>
       <Text adjustsFontSizeToFit numberOfLines={1} style={priceStyles.text}>${priceText}</Text>

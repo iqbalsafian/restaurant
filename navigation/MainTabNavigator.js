@@ -93,7 +93,7 @@ const tabNavigatorConfig = {
     },
     labelStyle: {
       fontSize: 40,
-      color: 'black'
+      color: 'black',
     },
     tabStyle: {
       // width: 300,
@@ -102,10 +102,9 @@ const tabNavigatorConfig = {
     },
     style: {
       backgroundColor: 'white',
-      marginBottom: -70,
       borderBottomStyle: 'solid',
       borderBottomColor: '#DCDCDC',
-      borderBottomWidth: 0.2,
+      borderBottomWidth: 'bold',
       alignContent: 'center',
       justifyContent: 'center'
     },
