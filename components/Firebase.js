@@ -6,13 +6,13 @@ import 'firebase/firestore';
 export const initializeFirebase = () => {
   if (!firebase.apps.length) {
     firebase.initializeApp({
-      apiKey: "",
-      authDomain: "",
-      databaseURL: "",
-      projectId: "",
-      storageBucket: "",
-      messagingSenderId: "",
-      appId: ""
+      apiKey: "-ovFD8QJ0ikUe2pcoLI",
+      authDomain: "eudaimonia-3240b.firebaseapp.com",
+      databaseURL: "https://eudaimonia-3240b.firebaseio.com",
+      projectId: "eudaimonia-3240b",
+      storageBucket: "eudaimonia-3240b.appspot.com",
+      messagingSenderId: "203900826837",
+      appId: "1:203900826837:web:bf1eed65d2ed1579"
     });
 
     firebase.firestore();
