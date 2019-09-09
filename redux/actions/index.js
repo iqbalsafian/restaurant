@@ -1,8 +1,8 @@
-import { CHANGE_CURRENT_ORDER } from "../constants/action-types";
+import { SET_CURRENT_ORDER_ID } from "../constants/action-types";
 
-export const changeCurrentOrder = orderId => (
+export const setCurrentOrder = orderId => (
   {
-    type: CHANGE_CURRENT_ORDER,
+    type: SET_CURRENT_ORDER_ID,
     payload: orderId
   }
 )

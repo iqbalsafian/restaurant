@@ -3,7 +3,6 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import LinksScreen from '../screens/LinksScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import ReadyScreen from '../screens/ReadyScreen';
 import LeftoversScreen from '../screens/LeftoversScreen';
@@ -23,7 +22,9 @@ const OrdersStack = createStackNavigator(
   config
 )
 
-OrdersScreen.navigationOptions = {
+OrdersStack.navigationOptions = {
+  title: 'Orders',
+  headerTitle: 'Orders',
   tabBarLabel: 'Orders',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -37,7 +38,7 @@ OrdersScreen.navigationOptions = {
   ),
 };
 
-OrdersStack.path = '';
+OrdersStack.path = 'orders';
 
 const ReadyStack = createStackNavigator(
   {
@@ -46,7 +47,7 @@ const ReadyStack = createStackNavigator(
   config
 )
 
-ReadyScreen.navigationOptions = {
+ReadyStack.navigationOptions = {
   tabBarLabel: 'Ready',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -60,23 +61,7 @@ ReadyScreen.navigationOptions = {
   ),
 };
 
-ReadyStack.path = '';
-
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-  config
-);
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
-
-LinksStack.path = '';
+ReadyStack.path = 'ready';
 
 const LeftoversStack = createStackNavigator(
   {
@@ -103,25 +88,37 @@ LeftoversStack.path = '';
 
 const tabNavigatorConfig = {
   tabBarOptions: {
+    indicatorStyle: {
+      backgroundColor: 'green'
+    },
     labelStyle: {
       fontSize: 40,
       color: 'black'
     },
     tabStyle: {
-      // width: 100,
+      // width: 300,
+      alignContent: 'center',
+      justifyContent: 'center',
     },
     style: {
       backgroundColor: 'white',
       marginBottom: -70,
+      borderBottomStyle: 'solid',
+      borderBottomColor: '#DCDCDC',
+      borderBottomWidth: 0.2,
+      alignContent: 'center',
+      justifyContent: 'center'
     },
+    lazy: true,
+    optimizationsEnabled: true,
   }
 }
 
 const tabNavigator = createMaterialTopTabNavigator({
   OrdersStack,
   ReadyStack,
-  // LinksStack
   LeftoversStack,
+  ReadyStack
 }, tabNavigatorConfig);
 
 tabNavigator.path = '';

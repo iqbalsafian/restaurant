@@ -9,6 +9,7 @@ export default function FormTextInput(props) {
     <TextInput
       selectionColor={colors.DODGER_BLUE}
       style={styles.textInput}
+      onChange={()=>props.onChangeText}
     />
   )
 }

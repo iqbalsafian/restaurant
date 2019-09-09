@@ -29,10 +29,10 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {/*}
         <Card.Title title="One" subtitle={"The \"super\" app of apps"} left={(props) => <Image resizeMode="contain" style={{width: 40, height: 40}} source={require('./assets/images/circle.png')} />} />
-        <Provider store={store}>
-          <AppNavigator />
-        </Provider>
+        {*/}
+        <AppNavigator />
       </View>
     );
   }

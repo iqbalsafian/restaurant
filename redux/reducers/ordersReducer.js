@@ -1,6 +1,6 @@
 import { SET_CURRENT_ORDER_ID } from '../constants/action-types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   orders: [
     {
       id: 1011,
@@ -9,7 +9,7 @@ const INITIAL_STATE = {
       total_price: 100,
       sales_tax: 10,
       custom_fees: 12,
-      list: [
+      lists: [
         {
           title: 'chicken brodo',
           price: 9
@@ -27,14 +27,36 @@ const INITIAL_STATE = {
       total_price: 100,
       sales_tax: 10,
       custom_fees: 12,
-      list: [
+      lists: [
         {
           title: 'chicken brodo',
-          price: 9
+          price: 9,
+          remarks: 'Extra Cheese'
         },
         {
           title: 'proscuitto pie',
-          price: 12
+          price: 12,
+          remarks: 'No Anchovies'
+        }
+      ]
+    },
+    {
+      id: 1008,
+      status: 'ready',
+      timestamp: 100,
+      total_price: 120,
+      sales_tax: 12,
+      custom_fees: 12,
+      lists: [
+        {
+          title: 'chicken brodo',
+          price: 9,
+          remarks: 'Extra Cheese'
+        },
+        {
+          title: 'proscuitto pie',
+          price: 12,
+          remarks: 'No Anchovies'
         }
       ]
     }
@@ -54,7 +76,6 @@ const ordersReducer = (state = INITIAL_STATE, action) => {
         currentOrderId
       }
     default: {
-      console.log(INITIAL_STATE);
       return state;
     }
   }

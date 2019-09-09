@@ -16,11 +16,11 @@ export default class AuthLoadingScreen extends React.Component {
 
   _bootstrapAsync = async () => {
     const jwtToken = await AsyncStorage.getItem('userToken') ? AsyncStorage.getItem('userToken') : null;
-    this.props.navigation.navigate(jwtToken ? 'App': 'Auth');
+
+    this.props.navigation.navigate(jwtToken ? 'Main': 'Auth');
   }
 
   render() {
-    console.log('jwttoken' + jwtToken);
     return(
       <View>
         <ActivityIndicator />
