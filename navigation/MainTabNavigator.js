@@ -3,9 +3,9 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import LinksScreen from '../screens/LinksScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import ReadyScreen from '../screens/ReadyScreen';
+import LeftoversScreen from '../screens/LeftoversScreen';
 
 const config = Platform.select({
   web: {
@@ -63,6 +63,29 @@ ReadyStack.navigationOptions = {
 
 ReadyStack.path = 'ready';
 
+const LeftoversStack = createStackNavigator(
+  {
+    Leftovers: LeftoversScreen,
+  },
+  config
+);
+
+LeftoversStack.navigationOptions = {
+  tabBarLabel: 'Leftovers',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
+
+LeftoversStack.path = '';
+
 const tabNavigatorConfig = {
   tabBarOptions: {
     indicatorStyle: {
@@ -79,6 +102,7 @@ const tabNavigatorConfig = {
     },
     style: {
       backgroundColor: 'white',
+      marginBottom: -70,
       borderBottomStyle: 'solid',
       borderBottomColor: '#DCDCDC',
       borderBottomWidth: 0.2,
@@ -92,6 +116,8 @@ const tabNavigatorConfig = {
 
 const tabNavigator = createMaterialTopTabNavigator({
   OrdersStack,
+  ReadyStack,
+  LeftoversStack,
   ReadyStack
 }, tabNavigatorConfig);
 
