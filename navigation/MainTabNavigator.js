@@ -96,7 +96,6 @@ const tabNavigatorConfig = {
       color: 'black',
     },
     tabStyle: {
-      // width: 300,
       alignContent: 'center',
       justifyContent: 'center',
     },
@@ -106,9 +105,10 @@ const tabNavigatorConfig = {
       borderBottomColor: '#DCDCDC',
       borderBottomWidth: 'bold',
       alignContent: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      margin: 10
     },
-    lazy: true,
+    // lazy: true,
     optimizationsEnabled: true,
   }
 }
@@ -117,7 +117,6 @@ const tabNavigator = createMaterialTopTabNavigator({
   OrdersStack,
   ReadyStack,
   LeftoversStack,
-  ReadyStack
 }, tabNavigatorConfig);
 
 tabNavigator.path = '';

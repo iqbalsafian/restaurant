@@ -1,4 +1,4 @@
-import * as WebBrowser from 'expo-web-browser';
+// import * as WebBrowser from 'expo-web-browser';
 import React, { useState } from 'react';
 import {
   Image,
@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import { Button, Card, Caption } from 'react-native-paper';
 import { INITIAL_STATE } from '../redux/reducers/ordersReducer';
+import { NavigationEvents } from 'react-navigation';
 
 function OrdersScreen(props) {
   const [, updateState] = useState();
@@ -19,13 +19,13 @@ function OrdersScreen(props) {
 
   let { orders } = INITIAL_STATE;
   let isOrderAvailable = orders.find(order=>(order.status==='new'||order.status==='in-progress'));
+
   let [currentOrderId, setCurrentOrderId] = useState(
-    isOrderAvailable ?
-    orders.find(order=>(order.status==='new'||order.status==='in-progress')).id : 0
+    isOrderAvailable ? orders.find(order=>(order.status==='new'||order.status==='in-progress')).id : 0
   );
+
   let [currentOrder, setCurrentOrder] = useState(
-    isOrderAvailable ?
-    orders.find(order=>(order.status==='new'||order.status==='in-progress')) : {}
+    isOrderAvailable ? orders.find(order=>(order.status==='new'||order.status==='in-progress')) : {}
   );
 
   const setOrderStatus = (status) => {
@@ -35,6 +35,7 @@ function OrdersScreen(props) {
 
   return (
     <View style={styles.container}>
+      <NavigationEvents onWillFocus={payload=>forceUpdate()}></NavigationEvents>
       <View style={{width: '20%'}}>
         <View style={{width: '100%'}}>
           <Text style={styles.leftHeader}>NEW ORDERS</Text>
@@ -186,14 +187,14 @@ function OrdersScreen(props) {
 }
 
 OrdersScreen.navigationOptions = {
-  header: null
+  header: null,
 };
 
 const styles = {
   container: {
     flex: 1,
     flexDirection: 'row',
-    padding: 10,
+    padding: 10
     // fontSize: 40
   },
   innerContainer: {

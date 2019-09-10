@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { NavigationEvents } from "react-navigation";
 import { Card, Caption, Button } from 'react-native-paper';
 import { INITIAL_STATE } from '../redux/reducers/ordersReducer';
 
@@ -33,6 +34,7 @@ export default function ReadyScreen() {
 
   return (
     <View style={styles.container}>
+      <NavigationEvents onWillFocus={payload=>forceUpdate()}></NavigationEvents>
       <View style={{width: '20%'}}>
         <View style={styles.leftTab}>
           <Text style={styles.leftHeader}>READY ORDERS</Text>
@@ -163,7 +165,7 @@ export default function ReadyScreen() {
 };
 
 ReadyScreen.navigationOptions = {
-  header: null
+  header: null,
 };
 
 const styles = {
